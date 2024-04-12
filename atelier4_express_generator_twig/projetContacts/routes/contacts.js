@@ -14,4 +14,15 @@ router.get('/', function (req, res, next) {
     res.render('contacts', {contactList: contacts});
 });
 
+router.get('/add', (request, response) => {
+    response.render('contact-add', {title: 'Ajout contact'});
+});
+
+router.post('/add', (req, resp) => {
+    const {lastname, firstname, phoneNumber} = req.body;
+    const idGenerated = contacts.length + 1;
+    let newContact = new Contact(idGenerated, lastname, firstname, phoneNumber);
+    contacts.push(newContact);
+    resp.redirect('/contacts');
+});
 export default router;
