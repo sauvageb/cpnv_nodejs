@@ -28,6 +28,18 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/contacts', contactsRouter);
 
+app.use('/test', (req, resp, next) => f1(req, resp, next), (req, resp, next) => f2(req, resp, next));
+
+const f1 = (req, resp, next) => {
+    console.log('f1');
+    next();
+}
+
+const f2 = (req, resp, next) => {
+    console.log('f2');
+    next();
+}
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
